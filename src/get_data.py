@@ -1,5 +1,8 @@
 import osmnx as ox
 import pandas as pd
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Define starting location (latitude, longitude)
 location_point = (-23.5505, -46.6333)  # São Paulo, Brazil
@@ -15,7 +18,7 @@ nodes_df = nodes[['y', 'x']].reset_index()
 nodes_df.columns = ['node_id', 'latitude', 'longitude']
 
 # Add elevation data (requires Google API key)
-api_key = "AIzaSyDQohTawlN9oGc-Ryxb1HNEorc811UIxOA"  # Replace with your actual API key
+api_key = load_dotenv("GOOGLE_API_KEY")  # Replace with your actual API key
 
 G = ox.elevation.add_node_elevations_google(G, api_key=api_key)
 
